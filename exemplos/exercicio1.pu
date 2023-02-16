@@ -1,0 +1,22 @@
+@startuml template
+
+!include ./defines.puml
+HIDE_STEREOTYPE()
+
+Container(web_app1, "SPA", " Svelte, go "," Possui todas as funcionalidadesdo home baking via browser", $tags="webApp")
+ContainerDb(rel_db, "Relational Database", "PostgreSQL", $sprite="postgresql")
+
+System_Boundary(c1, "API aplication"){
+    Container(web_app2, "Controle de autenticação", " go ", $tags="webApp")
+    Container(web_app3, "Componente de segurança", " go ", $tags="webApp")
+}
+
+Rel_R(web_app1, web_app2,"1. Solicita acesso")
+Rel(web_app2, web_app3,"2. Valida credenciais")
+Rel_R(web_app3, rel_db, "3. Select * from users where username = ?")
+Rel_L(rel_db, web_app3,"4. Retorna os dados do usuário")
+Rel(web_app3, web_app2,"5. Valida credenciais")
+Rel_L(web_app2, web_app1,"6. Retorno dos dados")
+
+SHOW_LEGEND()
+@enduml

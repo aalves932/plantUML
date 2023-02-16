@@ -1,0 +1,20 @@
+@startuml painelTesouraria
+
+!include ./defines.puml
+
+AddPersonTag("customer", $sprite="osa_user_large_group", $legendText="aggregated user")
+AddContainerTag("webApp", $sprite="application_server", $legendText="web app container")
+
+Person(user, "users", "Usuário Tesouraria", $tags="customer")
+Person(aggregated_user, "Sam, Ivone", $tags="customer")
+
+
+System_Boundary(c1, "Painel Tesouraria"){
+    Container(appsmith, "Painel Tesouraria", " appsmith ","Aplicação web com os processos de tesouraria", $sprite="application_server")
+    Container(gclick, "Gestão Click", " web app ","ERP web - processos da empresa", $sprite="application_server")
+}
+
+Rel(user, appsmith, "opera")
+Rel(user, gclick, "opera")
+
+@enduml

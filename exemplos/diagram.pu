@@ -1,0 +1,29 @@
+@startuml
+
+    !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+    !define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+    !define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+
+    !include DEVICONS/angular.puml
+    !include DEVICONS/java.puml
+    !include DEVICONS/msql_server.puml
+    !include DEVICONS/code.puml
+    !include DEVICONS/postgresql.puml
+    !include FONTAWESOME/users.puml
+
+    Person(user, "Customer", "People that need products", $sprite="users")
+    Container(spa, "SPA", "angular", "The main interface that the customer interacts with", $sprite="angular")
+    Container(api, "API", " javascript ", "Handles all business logic", $sprite="code")
+    ContainerDb(db, "Database", "Microsoft SQL", "Holds product, order and invoice information", $sprite="msql_server")
+    ContainerDb(dbPosgres, "Banco de Dados", " PostgreSQL ", "Persiste NFS-e, clientes, sync logs", $sprite="postgresql")
+
+    Rel(user, spa, "Uses")
+    Rel(spa, api, "Uses")
+    Rel_R(api, db, "Reads / Writes")
+    Rel(api, dbPosgres, "Read / Write")
+
+    SHOW_LEGEND()
+    Lay_Distance(LEGEND(), db, 1)
+
+@enduml

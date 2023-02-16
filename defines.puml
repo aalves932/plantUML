@@ -1,0 +1,37 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+!define osaPuml https://raw.githubusercontent.com/Crashedmind/PlantUML-opensecurityarchitecture2-icons/master
+!include osaPuml/Common.puml
+!include osaPuml/User/all.puml
+
+!include <office/Servers/database_server>
+!include <office/Servers/file_server>
+!include <office/Servers/application_server>
+!include <office/Concepts/service_application>
+!include <office/Concepts/firewall>
+
+!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+
+!include DEVICONS/angular.puml
+!include DEVICONS/java.puml
+!include DEVICONS/msql_server.puml
+!include DEVICONS/code.puml
+!include DEVICONS/postgresql.puml
+!include FONTAWESOME/users.puml
+
+
+AddExternalPersonTag("no_user", $sprite="osa_user_black_hat", $legendText="anonymous user", $shape=RoundedBoxShape())
+AddPersonTag("user", $sprite="osa_user_large_group", $legendText="registered user", $shape=RoundedBoxShape())
+AddPersonTag("admin",$sprite="osa_user_audit,color=#ffffbf", $fontColor="#ffffbf", $bgColor="#444444", $legendSprite="osa_user_audit,scale=0.25,color=#ffffbf", $legendText="admin user", , $shape=RoundedBoxShape())
+
+AddContainerTag("web_app", $sprite="application_server",  $bgColor="#2d3047", $fontColor=White,     $shape=RoundedBoxShape(), $legendText="web app container")
+AddContainerTag("db", $sprite="database_server",          $bgColor="#4A4F7A", $fontColor=White,     $shape=RoundedBoxShape(), $legendText="database container")
+AddContainerTag("files", $sprite="file_server",           $bgColor="#3E4DBB", $fontColor=White,     $shape=RoundedBoxShape(), $legendText="file server container")
+AddContainerTag("microservice", $sprite="code",           $bgColor="#3E4DBB", $fontColor=White,     $shape=EightSidedShape(), $legendText="microservice container")
+AddContainerTag("con_app", $sprite="service_application", $bgColor="#0",      $fontColor="#07CCB5", $shape=RoundedBoxShape(), $legendText="console app container")
+
+AddRelTag("firewall", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $sprite="firewall,scale=0.3,color=red", $legendText="firewall")
+
+@enduml
